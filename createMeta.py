@@ -2,6 +2,7 @@
 # make a network of just the representative images of each cluster and their intra cluster matches
 
 import json
+import networkx as nx
 
 ## OBJECTS: input cluster file and adjacency list 
 o = open ("meta.json", "w")
@@ -9,6 +10,7 @@ y = open ("./data/results_1-25-2018.csv", "r")
 x = open ("./data/clusters_1-25-2018.txt", "r")
 clusters_list = []
 adjacency_list = []
+G = nx.Graph()
 
 ## FUNCTIONS: 
 
@@ -68,6 +70,7 @@ x.close()
 nodes = [] 
 links = []
 for i in range(0, len(clusters_list)):
+    print (i, "of ", len(clusters_list))
 
     node = {}
     link = {} 
@@ -104,12 +107,14 @@ for i in range(0, len(clusters_list)):
             link["target"] = t
             link["weight"] = TARGETS.count(t) 
             links.append(link.copy())
+            G.add_edge(i, t, weight=TARGETS.count(t))
 
     node["name"] = i
     node["id"] = i
     node["value"] = len(elements)
     node["representative"] = representative
     nodes.append(node.copy())
+    G.add_node(i, size=len(elements), representative=representative)
 
 
 print ("{\"nodes\":", file=o)
@@ -118,5 +123,6 @@ print (",", file=o)
 print ("\"links\":", file=o)
 print (json.dumps(links), file = o)
 print ("}", file = o)
+nx.write_gexf(G, "meta_1-25-2018.gexf")
 
 

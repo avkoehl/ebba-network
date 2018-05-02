@@ -6,10 +6,12 @@
 #
 
 import json
+import networkx as nx
 
 ## OBJECTS: input files and output file
 f = open ("./data/results_1-25-2018.csv", "r")
 y = open ("network_1-25-2018.json", "w")
+G = nx.Graph()
 
 
 ## FUNCTIONS: 
@@ -32,7 +34,6 @@ def getcluster(source):
     idx = 0
     for line in c:
         if str(source) in line:
-            print ("here")
             return idx
         idx = idx + 1
     return -1
@@ -42,16 +43,16 @@ def getcluster(source):
 
 nodes = []
 links = []
-for line in f:
+for n, line in enumerate(f):
     node = {}
     link = {}
 
     source,targets = parse(line)
-    print (source)
     idx= getcluster (source)
     node["name"] = source
     node["group"] = idx
     nodes.append(node.copy())
+    G.add_node(source, group=idx)
 
     for t in targets:
         exploded = t.split(' ')
@@ -60,6 +61,7 @@ for line in f:
         link["source"] = source
         link["target"] = edge
         link["weight"] = int(distance)
+        G.add_edge(source, edge, weight=distance)
         links.append(link.copy())
 
 
@@ -69,5 +71,4 @@ print (",", file=y)
 print ("\"links\":", file=y)
 print (json.dumps(links), file = y)
 print ("}", file = y)
-
-
+nx.write_gexf(G, "network_1-25-2018.gexf")
