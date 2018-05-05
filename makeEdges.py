@@ -14,8 +14,8 @@ def parse( line ):
     return (source, targets)
 
 ## OBJECTS: file and graph
-f = open ("results_1-25-2018.csv", "r")
-y = open ("edges_1-25-2018.txt", "w")
+f = open ("./data/flickr/results_flickr.csv", "r") #make these command line arguments
+y = open ("./data/flickr/edges_flickr.txt", "w")
 
 ## MAIN: read in adjacency list and output abc format for mcl 
 for line in f:
