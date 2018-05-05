@@ -9,8 +9,8 @@ import json
 import networkx as nx
 
 ## OBJECTS: input files and output file
-f = open ("./data/results_1-25-2018.csv", "r")
-y = open ("network_1-25-2018.json", "w")
+f = open ("./data/flickr/results_flickr.csv", "r")
+y = open ("./data/flickr/network_flickr.json", "w")
 G = nx.Graph()
 
 
@@ -30,7 +30,7 @@ def parse( line ):
     return (source, targets)
 
 def getcluster(source):
-    c = open ("./data/clusters_1-25-2018.txt", "r")
+    c = open ("./data/flickr/clusters_flickr.txt", "r")
     idx = 0
     for line in c:
         if str(source) in line:
