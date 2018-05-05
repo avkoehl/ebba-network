@@ -5,9 +5,9 @@ import json
 import networkx as nx
 
 ## OBJECTS: input cluster file and adjacency list 
-o = open ("meta.json", "w")
-y = open ("./data/results_1-25-2018.csv", "r")
-x = open ("./data/clusters_1-25-2018.txt", "r")
+o = open ("./data/flickr/meta_flickr.json", "w") #ouptut
+y = open ("./data/flickr/results_flickr.csv", "r")
+x = open ("./data/flickr/clusters_flickr.txt", "r")
 clusters_list = []
 adjacency_list = []
 G = nx.Graph()
@@ -123,6 +123,6 @@ print (",", file=o)
 print ("\"links\":", file=o)
 print (json.dumps(links), file = o)
 print ("}", file = o)
-nx.write_gexf(G, "meta_1-25-2018.gexf")
+nx.write_gexf(G, "./data/flickr/meta_flickr.gexf")
 
 
