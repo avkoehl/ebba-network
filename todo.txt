@@ -1,0 +1,4 @@
+move to bitbucket repo
+
+make all the inputs and output filepaths be command line arguments
+make new repo for the website that links to this
