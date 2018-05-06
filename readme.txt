@@ -1,19 +1,19 @@
 A series of programs useful for visualizing the network created by Archv.
 
-[1] makeEdges.py 
+[1] edges.py 
 	takes as input the adjeceny list of matches
 	outputs a text file where each line is a different edge
 	then run mcl edges.txt --abc -o clusters.txt
 
-[2] makeFullList.py
+[2] full_list.py
 	takes as input the adjecency list and the clusters.txt file
 	creates a new adjacency list that has a column with cluster id
 
-[3] createNetwork.py
+[3] network.py
 	takes as input the full adjacency list from 2
 	creates in json format the graph file
 
-[4] createMeta.py
+[4] meta.py
 	takes the full list from 2
 	creates a graph file of the meta network
 	the meta network is such that each cluster becomes a node
