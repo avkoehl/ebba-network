@@ -6,7 +6,7 @@ def parse( line ):
     elements = line.split(',')
     
     # get source
-    source = elements[0]
+    source = elements[1]
 
     # get targets and weights
     targets = []
@@ -18,11 +18,12 @@ def parse( line ):
 ## configure
 threshold = 7
 inputfile = open ("./data/flickr/results_flickr.csv", "r")
-outputfile = open ("./data/flickr/threshold_results_flickr.csv", "w")
+outputfile = open ("./data/flickr/threshold_results_flickr.csv", "a")
 
 
 ## main
 for line in inputfile:
+
     new_targets = []
     source, targets = parse(line)
     for t in targets:
@@ -32,9 +33,10 @@ for line in inputfile:
         if int(distance) > 7:
             new_targets.append(t)
 
-    print ("===========")
-    print ("line: ", line)
-    print ("new line: ", source, ",", ",".join(new_targets))
+    new_targets_string = ",".join(new_targets)
+    name = source.split(' ')[0]
+
+    print (name + "," + source + "," + ",".join(new_targets), file=outputfile)
 
             
 
